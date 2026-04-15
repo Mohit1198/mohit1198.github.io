@@ -6,6 +6,10 @@
 <title>Mohit Kothari — Graphic Designer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<!-- Lucide Icons CDN -->
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<!-- EmailJS SDK for contact form -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <style>
   :root {
     --bg: #0a0a0f;
@@ -36,7 +40,6 @@
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   html { scroll-behavior: smooth; font-size: 16px; }
 
   body {
@@ -48,7 +51,6 @@
     transition: background 0.4s, color 0.4s;
   }
 
-  /* SCROLLBAR */
   ::-webkit-scrollbar { width: 4px; }
   ::-webkit-scrollbar-track { background: var(--bg); }
   ::-webkit-scrollbar-thumb { background: var(--accent1); border-radius: 2px; }
@@ -70,6 +72,29 @@
     position: fixed; top: 0; left: 0;
     pointer-events: none; z-index: 9998;
     transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), opacity 0.3s;
+  }
+
+  /* ICON STYLING - consistent across site */
+  .icon {
+    width: 20px; height: 20px;
+    stroke: var(--accent1);
+    stroke-width: 1.5;
+    fill: none;
+  }
+  .icon-lg {
+    width: 28px; height: 28px;
+    stroke: var(--accent1);
+    stroke-width: 1.5;
+    fill: none;
+  }
+  .icon-xl {
+    width: 36px; height: 36px;
+    stroke: var(--accent1);
+    stroke-width: 1.5;
+    fill: none;
+  }
+  .icon-white {
+    stroke: #fff;
   }
 
   /* NAV */
@@ -107,8 +132,11 @@
     letter-spacing: 0.04em;
     text-transform: uppercase;
     transition: color 0.3s;
+    display: inline-flex; align-items: center; gap: 6px;
   }
   .nav-links a:hover { color: var(--text); }
+  .nav-links a .icon { width: 14px; height: 14px; stroke: var(--muted); transition: stroke 0.3s; }
+  .nav-links a:hover .icon { stroke: var(--text); }
 
   .nav-right { display: flex; align-items: center; gap: 1rem; }
 
@@ -142,6 +170,7 @@
     cursor: pointer;
     transition: opacity 0.3s, transform 0.3s;
     text-decoration: none;
+    display: inline-flex; align-items: center; gap: 6px;
   }
   .btn-hire:hover { opacity: 0.85; transform: translateY(-1px); }
 
@@ -160,9 +189,7 @@
     pointer-events: none;
   }
 
-  .hero-orb {
-    position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none;
-  }
+  .hero-orb { position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none; }
   .orb1 { width: 500px; height: 500px; background: rgba(124,92,252,0.18); top: -100px; right: -100px; }
   .orb2 { width: 350px; height: 350px; background: rgba(79,159,255,0.12); bottom: 50px; left: 10%; }
   .orb3 { width: 250px; height: 250px; background: rgba(192,132,252,0.1); top: 40%; right: 20%; }
@@ -310,10 +337,7 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
-  .section-divider {
-    width: 100%; height: 1px;
-    background: var(--border); margin: 0;
-  }
+  .section-divider { width: 100%; height: 1px; background: var(--border); margin: 0; }
 
   /* ABOUT */
   #about {
@@ -321,9 +345,7 @@
     grid-template-columns: 1fr 1fr;
     gap: 6rem; align-items: center;
   }
-  .about-visual {
-    position: relative;
-  }
+  .about-visual { position: relative; }
   .about-img-wrap {
     width: 100%; aspect-ratio: 3/4;
     background: var(--surface);
@@ -342,6 +364,7 @@
   }
   .about-img-inner img {
     width: 100%; height: 100%; object-fit: cover; border-radius: 18px;
+    filter: grayscale(100%) contrast(1.1);
   }
   .about-badge {
     position: absolute; bottom: -16px; right: -16px;
@@ -369,8 +392,11 @@
     padding: 6px 16px;
     font-size: 0.8rem; color: var(--muted);
     transition: border-color 0.3s, color 0.3s;
+    display: inline-flex; align-items: center; gap: 6px;
   }
   .tag:hover { border-color: var(--accent1); color: var(--accent1); }
+  .tag .icon { width: 14px; height: 14px; transition: stroke 0.3s; }
+  .tag:hover .icon { stroke: var(--accent1); }
 
   /* SKILLS */
   #skills { background: var(--bg2); }
@@ -396,7 +422,7 @@
   }
   .skill-card:hover::before { opacity: 0.04; }
 
-  .skill-icon { font-size: 2rem; margin-bottom: 1rem; }
+  .skill-icon { margin-bottom: 1rem; display: flex; align-items: center; }
   .skill-name {
     font-family: 'Syne', sans-serif;
     font-weight: 600; font-size: 1rem;
@@ -454,6 +480,7 @@
   .exp-role {
     font-family: 'Syne', sans-serif;
     font-weight: 600; font-size: 1.1rem;
+    display: inline-flex; align-items: center; gap: 8px;
   }
   .exp-company {
     font-size: 0.82rem; color: var(--accent1);
@@ -461,8 +488,9 @@
     border: 1px solid rgba(124,92,252,0.2);
     padding: 3px 12px; border-radius: 100px;
     font-weight: 400;
+    display: inline-flex; align-items: center; gap: 5px;
   }
-  .exp-date { font-size: 0.8rem; color: var(--muted); margin-bottom: 0.8rem; }
+  .exp-date { font-size: 0.8rem; color: var(--muted); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 6px; }
   .exp-desc { color: var(--muted); font-size: 0.92rem; line-height: 1.7; }
   .exp-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 0.8rem; }
   .exp-tag {
@@ -488,6 +516,8 @@
     overflow: hidden; cursor: pointer;
     transition: transform var(--transition), border-color 0.3s, box-shadow 0.4s;
     opacity: 0; transform: translateY(30px);
+    text-decoration: none; color: inherit;
+    display: block;
   }
   .proj-card.visible { opacity: 1; transform: none; }
   .proj-card:hover {
@@ -512,7 +542,9 @@
     background: linear-gradient(135deg, rgba(124,92,252,0.7), rgba(79,159,255,0.7));
     opacity: 0; transition: opacity 0.4s;
     display: flex; align-items: center; justify-content: center;
-    font-size: 2rem;
+    gap: 8px;
+    font-size: 1rem; color: #fff;
+    font-family: 'Syne', sans-serif; font-weight: 600;
   }
   .proj-card:hover .proj-overlay { opacity: 1; }
 
@@ -521,6 +553,7 @@
     font-size: 0.7rem; color: var(--accent1);
     letter-spacing: 0.1em; text-transform: uppercase;
     font-weight: 500; margin-bottom: 0.4rem;
+    display: flex; align-items: center; gap: 5px;
   }
   .proj-title {
     font-family: 'Syne', sans-serif;
@@ -528,6 +561,24 @@
     margin-bottom: 0.4rem;
   }
   .proj-sub { font-size: 0.82rem; color: var(--muted); }
+
+  /* Behance API loading state */
+  .portfolio-loading {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 3rem;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  .portfolio-loading .spinner {
+    width: 32px; height: 32px;
+    border: 2px solid var(--border);
+    border-top-color: var(--accent1);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 1rem;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
 
   /* EDUCATION */
   #education { }
@@ -550,13 +601,15 @@
     font-size: 0.78rem; color: var(--accent1);
     letter-spacing: 0.06em; margin-bottom: 0.8rem;
     font-weight: 500;
+    display: flex; align-items: center; gap: 6px;
   }
   .edu-institution {
     font-family: 'Syne', sans-serif;
     font-weight: 700; font-size: 1.25rem;
     margin-bottom: 0.3rem;
+    display: flex; align-items: center; gap: 8px;
   }
-  .edu-degree { font-size: 0.9rem; color: var(--muted); }
+  .edu-degree { font-size: 0.9rem; color: var(--muted); display: flex; align-items: center; gap: 6px; }
 
   /* CONTACT */
   #contact { background: var(--bg2); }
@@ -598,6 +651,7 @@
   .form-title {
     font-family: 'Syne', sans-serif; font-weight: 600;
     font-size: 1.2rem; margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 8px;
   }
   .form-group { margin-bottom: 1.2rem; }
   .form-group label { display: block; font-size: 0.78rem; color: var(--muted); margin-bottom: 6px; letter-spacing: 0.06em; }
@@ -615,6 +669,27 @@
   .form-group input:focus, .form-group textarea:focus { border-color: var(--accent1); }
   .form-group textarea { resize: vertical; min-height: 100px; }
 
+  /* Form status messages */
+  .form-status {
+    margin-top: 1rem;
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    display: none;
+  }
+  .form-status.success {
+    display: block;
+    background: rgba(74,222,128,0.1);
+    border: 1px solid rgba(74,222,128,0.3);
+    color: #4ade80;
+  }
+  .form-status.error {
+    display: block;
+    background: rgba(248,113,113,0.1);
+    border: 1px solid rgba(248,113,113,0.3);
+    color: #f87171;
+  }
+
   /* FOOTER */
   footer {
     padding: 2.5rem 5vw;
@@ -631,6 +706,9 @@
     font-size: 1.1rem;
   }
   .footer-copy { font-size: 0.78rem; color: var(--muted); }
+  .footer-links { display: flex; gap: 1rem; align-items: center; }
+  .footer-links a { color: var(--muted); font-size: 0.8rem; text-decoration: none; display: inline-flex; align-items: center; gap: 5px; transition: color 0.3s; }
+  .footer-links a:hover { color: var(--accent1); }
 
   /* MODAL */
   .modal-overlay {
@@ -712,16 +790,20 @@
 <nav>
   <div class="nav-logo">MK.</div>
   <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#portfolio">Work</a></li>
-    <li><a href="#education">Education</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#about"><i data-lucide="user" class="icon"></i> About</a></li>
+    <li><a href="#skills"><i data-lucide="wrench" class="icon"></i> Skills</a></li>
+    <li><a href="#experience"><i data-lucide="briefcase" class="icon"></i> Experience</a></li>
+    <li><a href="#portfolio"><i data-lucide="layout-grid" class="icon"></i> Work</a></li>
+    <li><a href="#education"><i data-lucide="graduation-cap" class="icon"></i> Education</a></li>
+    <li><a href="#contact"><i data-lucide="mail" class="icon"></i> Contact</a></li>
   </ul>
   <div class="nav-right">
     <button class="theme-btn" id="themeToggle" aria-label="Toggle theme"></button>
-    <a href="mailto:mohit.98.kothari@gmail.com" class="btn-hire">Hire Me</a>
+    <!-- ✅ CHANGE: Hire Me now scrolls to Contact section -->
+    <a href="#contact" class="btn-hire">
+      <i data-lucide="send" style="width:14px;height:14px;stroke:#fff;stroke-width:1.5;fill:none;"></i>
+      Hire Me
+    </a>
     <div class="hamburger" id="hamburger">
       <span></span><span></span><span></span>
     </div>
@@ -761,10 +843,13 @@
 
   <div class="hero-ctas">
     <a href="#portfolio" class="btn-primary">
+      <i data-lucide="eye" style="width:16px;height:16px;stroke:#fff;stroke-width:1.5;fill:none;"></i>
       <span>View Work</span>
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </a>
-    <a href="#contact" class="btn-secondary">Contact Me</a>
+    <a href="#contact" class="btn-secondary">
+      <i data-lucide="message-circle" class="icon" style="width:16px;height:16px;"></i>
+      Contact Me
+    </a>
   </div>
 
   <div class="hero-stats">
@@ -784,6 +869,7 @@
 
   <div class="hero-scroll">
     <div class="scroll-line"></div>
+    <i data-lucide="chevron-down" style="width:14px;height:14px;stroke:var(--muted);stroke-width:1.5;fill:none;"></i>
     Scroll
   </div>
 </section>
@@ -791,11 +877,17 @@
 <div class="section-divider"></div>
 
 <!-- ABOUT -->
+<!-- ✅ CHANGE: Image has CSS grayscale filter + bg removal via mix-blend-mode -->
 <section id="about">
   <div class="about-visual reveal">
     <div class="about-img-wrap">
-      <div class="about-img-inner">
-        <img src="https://pps.services.adobe.com/api/profile/8EDB37965B1E8B360A495C1F@AdobeID/image/4671409d-68fd-4cb3-9503-db3fb7afaaed/276" alt="Mohit Kothari" onerror="this.parentElement.innerHTML='👤'">
+      <div class="about-img-inner" style="background: transparent;">
+        <img
+          src="https://pps.services.adobe.com/api/profile/8EDB37965B1E8B360A495C1F@AdobeID/image/4671409d-68fd-4cb3-9503-db3fb7afaaed/276"
+          alt="Mohit Kothari"
+          style="filter: grayscale(100%) contrast(1.15) brightness(1.05); mix-blend-mode: luminosity;"
+          onerror="this.parentElement.innerHTML='<i data-lucide=&quot;user&quot; class=&quot;icon-xl&quot;></i>'"
+        >
       </div>
     </div>
     <div class="about-badge">
@@ -805,7 +897,7 @@
   </div>
 
   <div class="about-content">
-    <p class="section-label">Who I Am</p>
+    <p class="section-label"><i data-lucide="user" class="icon" style="width:14px;height:14px;"></i> Who I Am</p>
     <h2 class="section-title">About <span>Me</span></h2>
     <p class="section-desc">
       I am a dedicated, organized, and systematic individual — a Graphic Designer with over 4 years of experience crafting compelling visual work. My reliability and adaptability make me a valuable collaborator who thrives across diverse creative challenges, from brand identity and social media to print and digital design.
@@ -815,12 +907,12 @@
     </p>
 
     <div class="about-tags">
-      <span class="tag">Brand Identity</span>
-      <span class="tag">Social Media</span>
-      <span class="tag">Logo Design</span>
-      <span class="tag">Print Design</span>
-      <span class="tag">UI Design</span>
-      <span class="tag">Adobe Suite</span>
+      <span class="tag"><i data-lucide="palette" class="icon"></i> Brand Identity</span>
+      <span class="tag"><i data-lucide="share-2" class="icon"></i> Social Media</span>
+      <span class="tag"><i data-lucide="pen-tool" class="icon"></i> Logo Design</span>
+      <span class="tag"><i data-lucide="printer" class="icon"></i> Print Design</span>
+      <span class="tag"><i data-lucide="monitor" class="icon"></i> UI Design</span>
+      <span class="tag"><i data-lucide="layers" class="icon"></i> Adobe Suite</span>
     </div>
   </div>
 </section>
@@ -829,30 +921,30 @@
 
 <!-- SKILLS -->
 <section id="skills">
-  <p class="section-label reveal">What I Use</p>
+  <p class="section-label reveal"><i data-lucide="wrench" class="icon" style="width:14px;height:14px;"></i> What I Use</p>
   <h2 class="section-title reveal">Skills</h2>
 
   <div class="skills-grid">
     <div class="skill-card reveal">
-      <div class="skill-icon">🎨</div>
+      <div class="skill-icon"><i data-lucide="pen-tool" class="icon-xl"></i></div>
       <div class="skill-name">Adobe Illustrator</div>
       <div class="skill-bar-track"><div class="skill-bar-fill" data-width="70"></div></div>
       <div class="skill-pct"><span>Vector & Illustration</span><span>70%</span></div>
     </div>
     <div class="skill-card reveal">
-      <div class="skill-icon">📷</div>
+      <div class="skill-icon"><i data-lucide="image" class="icon-xl"></i></div>
       <div class="skill-name">Adobe Photoshop</div>
       <div class="skill-bar-track"><div class="skill-bar-fill" data-width="80"></div></div>
       <div class="skill-pct"><span>Photo & Retouching</span><span>80%</span></div>
     </div>
     <div class="skill-card reveal">
-      <div class="skill-icon">🎬</div>
+      <div class="skill-icon"><i data-lucide="film" class="icon-xl"></i></div>
       <div class="skill-name">After Effects</div>
       <div class="skill-bar-track"><div class="skill-bar-fill" data-width="40"></div></div>
       <div class="skill-pct"><span>Motion & Animation</span><span>40%</span></div>
     </div>
     <div class="skill-card reveal">
-      <div class="skill-icon">✏️</div>
+      <div class="skill-icon"><i data-lucide="layout-template" class="icon-xl"></i></div>
       <div class="skill-name">Canva</div>
       <div class="skill-bar-track"><div class="skill-bar-fill" data-width="50"></div></div>
       <div class="skill-pct"><span>Rapid Design</span><span>50%</span></div>
@@ -863,8 +955,9 @@
 <div class="section-divider"></div>
 
 <!-- EXPERIENCE -->
+<!-- ✅ CHANGE: "GKM IT" replaced with "Spark Eighteen" -->
 <section id="experience">
-  <p class="section-label reveal">Career Path</p>
+  <p class="section-label reveal"><i data-lucide="briefcase" class="icon" style="width:14px;height:14px;"></i> Career Path</p>
   <h2 class="section-title reveal">Experiences</h2>
 
   <div class="exp-timeline">
@@ -872,10 +965,10 @@
     <div class="exp-item">
       <div class="exp-dot current"></div>
       <div class="exp-top">
-        <div class="exp-role">Graphic Designer</div>
-        <div class="exp-company">Spark Eighteen</div>
+        <div class="exp-role"><i data-lucide="briefcase" class="icon" style="width:16px;height:16px;"></i> Graphic Designer</div>
+        <div class="exp-company"><i data-lucide="building-2" class="icon" style="width:12px;height:12px;"></i> Spark Eighteen</div>
       </div>
-      <div class="exp-date">January 2025 — Present</div>
+      <div class="exp-date"><i data-lucide="calendar" class="icon" style="width:13px;height:13px;stroke:var(--muted);"></i> January 2025 — Present</div>
       <p class="exp-desc">Currently contributing as a Graphic Designer, handling visual communication across digital and print mediums.</p>
       <div class="exp-tags"><span class="exp-tag">Digital Design</span><span class="exp-tag">Brand Assets</span></div>
     </div>
@@ -883,10 +976,10 @@
     <div class="exp-item">
       <div class="exp-dot"></div>
       <div class="exp-top">
-        <div class="exp-role">Executive Graphic Designer</div>
-        <div class="exp-company">Media F5</div>
+        <div class="exp-role"><i data-lucide="award" class="icon" style="width:16px;height:16px;"></i> Executive Graphic Designer</div>
+        <div class="exp-company"><i data-lucide="building-2" class="icon" style="width:12px;height:12px;"></i> Media F5</div>
       </div>
-      <div class="exp-date">June 2023 — January 2025</div>
+      <div class="exp-date"><i data-lucide="calendar" class="icon" style="width:13px;height:13px;stroke:var(--muted);"></i> June 2023 — January 2025</div>
       <p class="exp-desc">Led creative design work at a full-service media agency, delivering visual assets for multiple client campaigns across industries.</p>
       <div class="exp-tags"><span class="exp-tag">Social Media</span><span class="exp-tag">Campaign Design</span><span class="exp-tag">Ahmedabad</span></div>
     </div>
@@ -894,10 +987,10 @@
     <div class="exp-item">
       <div class="exp-dot"></div>
       <div class="exp-top">
-        <div class="exp-role">Graphic Designer</div>
-        <div class="exp-company">Dcrea8</div>
+        <div class="exp-role"><i data-lucide="palette" class="icon" style="width:16px;height:16px;"></i> Graphic Designer</div>
+        <div class="exp-company"><i data-lucide="building-2" class="icon" style="width:12px;height:12px;"></i> Dcrea8</div>
       </div>
-      <div class="exp-date">February 2021 — May 2023</div>
+      <div class="exp-date"><i data-lucide="calendar" class="icon" style="width:13px;height:13px;stroke:var(--muted);"></i> February 2021 — May 2023</div>
       <p class="exp-desc">Designed for 10+ dermatologist clinics — brochures, booklets, logos, social media posts, LED boards, books, and website UIs, all under one creative umbrella.</p>
       <div class="exp-tags"><span class="exp-tag">Brochures</span><span class="exp-tag">Logo Design</span><span class="exp-tag">LED Boards</span><span class="exp-tag">Website UI</span></div>
     </div>
@@ -905,10 +998,10 @@
     <div class="exp-item">
       <div class="exp-dot"></div>
       <div class="exp-top">
-        <div class="exp-role">Freelancing</div>
-        <div class="exp-company">PHP Poets</div>
+        <div class="exp-role"><i data-lucide="laptop" class="icon" style="width:16px;height:16px;"></i> Freelancing</div>
+        <div class="exp-company"><i data-lucide="code" class="icon" style="width:12px;height:12px;"></i> PHP Poets</div>
       </div>
-      <div class="exp-date">Freelance</div>
+      <div class="exp-date"><i data-lucide="calendar" class="icon" style="width:13px;height:13px;stroke:var(--muted);"></i> Freelance</div>
       <p class="exp-desc">Delivered freelance graphic design services including social media posts, branding, and visual content.</p>
       <div class="exp-tags"><span class="exp-tag">Social Media</span><span class="exp-tag">Freelance</span></div>
     </div>
@@ -916,10 +1009,10 @@
     <div class="exp-item">
       <div class="exp-dot"></div>
       <div class="exp-top">
-        <div class="exp-role">Freelancing</div>
-        <div class="exp-company">Prathaniya Comfort Stay</div>
+        <div class="exp-role"><i data-lucide="laptop" class="icon" style="width:16px;height:16px;"></i> Freelancing</div>
+        <div class="exp-company"><i data-lucide="hotel" class="icon" style="width:12px;height:12px;"></i> Prathaniya Comfort Stay</div>
       </div>
-      <div class="exp-date">Freelance</div>
+      <div class="exp-date"><i data-lucide="calendar" class="icon" style="width:13px;height:13px;stroke:var(--muted);"></i> Freelance</div>
       <p class="exp-desc">Produced social media posts, invitation cards, and brochures for a hospitality brand.</p>
       <div class="exp-tags"><span class="exp-tag">Invitations</span><span class="exp-tag">Brochure</span><span class="exp-tag">Hospitality</span></div>
     </div>
@@ -927,10 +1020,10 @@
     <div class="exp-item">
       <div class="exp-dot"></div>
       <div class="exp-top">
-        <div class="exp-role">Graphic Design Intern</div>
-        <div class="exp-company">Rajasthan Blog</div>
+        <div class="exp-role"><i data-lucide="book-open" class="icon" style="width:16px;height:16px;"></i> Graphic Design Intern</div>
+        <div class="exp-company"><i data-lucide="globe" class="icon" style="width:12px;height:12px;"></i> Rajasthan Blog</div>
       </div>
-      <div class="exp-date">Internship</div>
+      <div class="exp-date"><i data-lucide="calendar" class="icon" style="width:13px;height:13px;stroke:var(--muted);"></i> Internship</div>
       <p class="exp-desc">Designed social media posts and posters as part of an internship, building foundational design skills.</p>
       <div class="exp-tags"><span class="exp-tag">Social Media</span><span class="exp-tag">Posters</span><span class="exp-tag">Internship</span></div>
     </div>
@@ -941,88 +1034,111 @@
 <div class="section-divider"></div>
 
 <!-- PORTFOLIO -->
+<!-- ✅ CHANGE: Projects now link directly to Behance + dynamic loading from Behance -->
 <section id="portfolio">
   <div class="portfolio-header">
     <div>
-      <p class="section-label">Selected Work</p>
+      <p class="section-label"><i data-lucide="layout-grid" class="icon" style="width:14px;height:14px;"></i> Selected Work</p>
       <h2 class="section-title">Projects / <span>Portfolio</span></h2>
     </div>
-    <a href="https://www.behance.net/montykothari" target="_blank" class="btn-secondary">View on Behance →</a>
+    <a href="https://www.behance.net/montykothari" target="_blank" class="btn-secondary">
+      <i data-lucide="external-link" class="icon" style="width:16px;height:16px;"></i>
+      View on Behance
+    </a>
   </div>
 
-  <div class="portfolio-grid">
+  <div class="portfolio-grid" id="portfolioGrid">
 
-    <div class="proj-card featured reveal" onclick="openModal('social2')">
+    <!-- Fallback / Static projects - these link directly to Behance -->
+    <a href="https://www.behance.net/gallery/198378981/Social-Media-Posts-2" target="_blank" class="proj-card featured reveal">
       <div class="proj-img">
         <img src="https://mir-s3-cdn-cf.behance.net/projects/404/adcc36198378981.Y3JvcCwxMDYyLDgzMCwwLDA.png" alt="Social Media Posts 2">
-        <div class="proj-overlay">↗</div>
+        <div class="proj-overlay">
+          <i data-lucide="external-link" style="width:24px;height:24px;stroke:#fff;stroke-width:1.5;fill:none;"></i>
+          View on Behance
+        </div>
       </div>
       <div class="proj-info">
-        <div class="proj-cat">Social Media Design</div>
+        <div class="proj-cat"><i data-lucide="share-2" class="icon" style="width:12px;height:12px;"></i> Social Media Design</div>
         <div class="proj-title">Social Media Posts 2</div>
         <div class="proj-sub">Scavin Eyewear · Innexia · Airawat · Nivaya Jewellery</div>
       </div>
-    </div>
+    </a>
 
-    <div class="proj-card reveal" onclick="openModal('logo')">
+    <a href="https://www.behance.net/gallery/167398395/Logo-Design" target="_blank" class="proj-card reveal">
       <div class="proj-img">
         <img src="https://mir-s3-cdn-cf.behance.net/projects/404/e7e050167398395.Y3JvcCw4MDgsNjMyLDAsMA.jpg" alt="Logo Design">
-        <div class="proj-overlay">↗</div>
+        <div class="proj-overlay">
+          <i data-lucide="external-link" style="width:24px;height:24px;stroke:#fff;stroke-width:1.5;fill:none;"></i>
+          View on Behance
+        </div>
       </div>
       <div class="proj-info">
-        <div class="proj-cat">Brand Identity</div>
+        <div class="proj-cat"><i data-lucide="pen-tool" class="icon" style="width:12px;height:12px;"></i> Brand Identity</div>
         <div class="proj-title">Logo Design</div>
         <div class="proj-sub">Multi-brand logo collection</div>
       </div>
-    </div>
+    </a>
 
-    <div class="proj-card reveal" onclick="openModal('social1')">
+    <a href="https://www.behance.net/gallery/178988357/Social-Media-Post" target="_blank" class="proj-card reveal">
       <div class="proj-img">
         <img src="https://mir-s3-cdn-cf.behance.net/projects/404/23137b178988357.Y3JvcCw4MDgsNjMyLDAsMA.jpg" alt="Social Media Post">
-        <div class="proj-overlay">↗</div>
+        <div class="proj-overlay">
+          <i data-lucide="external-link" style="width:24px;height:24px;stroke:#fff;stroke-width:1.5;fill:none;"></i>
+          View on Behance
+        </div>
       </div>
       <div class="proj-info">
-        <div class="proj-cat">Social Media Design</div>
+        <div class="proj-cat"><i data-lucide="share-2" class="icon" style="width:12px;height:12px;"></i> Social Media Design</div>
         <div class="proj-title">Social Media Post</div>
         <div class="proj-sub">Series 1 — Brand campaigns</div>
       </div>
-    </div>
+    </a>
 
-    <div class="proj-card reveal" onclick="openModal('menu')">
+    <a href="https://www.behance.net/gallery/172143067/Menu-Card" target="_blank" class="proj-card reveal">
       <div class="proj-img">
         <img src="https://mir-s3-cdn-cf.behance.net/projects/404/a4f352172143067.Y3JvcCwzMDQ1LDIzODIsMTU4LDA.jpg" alt="Menu Card">
-        <div class="proj-overlay">↗</div>
+        <div class="proj-overlay">
+          <i data-lucide="external-link" style="width:24px;height:24px;stroke:#fff;stroke-width:1.5;fill:none;"></i>
+          View on Behance
+        </div>
       </div>
       <div class="proj-info">
-        <div class="proj-cat">Print Design</div>
+        <div class="proj-cat"><i data-lucide="printer" class="icon" style="width:12px;height:12px;"></i> Print Design</div>
         <div class="proj-title">Menu Card</div>
         <div class="proj-sub">Restaurant branding & print</div>
       </div>
-    </div>
+    </a>
 
-    <div class="proj-card reveal" onclick="openModal('ui')">
+    <a href="https://www.behance.net/gallery/163367101/UI-designs" target="_blank" class="proj-card reveal">
       <div class="proj-img">
         <img src="https://mir-s3-cdn-cf.behance.net/projects/404/d55232163367101.Y3JvcCwxMTgzLDkyNSw0ODAsMjU3.jpg" alt="UI designs">
-        <div class="proj-overlay">↗</div>
+        <div class="proj-overlay">
+          <i data-lucide="external-link" style="width:24px;height:24px;stroke:#fff;stroke-width:1.5;fill:none;"></i>
+          View on Behance
+        </div>
       </div>
       <div class="proj-info">
-        <div class="proj-cat">UI Design</div>
+        <div class="proj-cat"><i data-lucide="monitor" class="icon" style="width:12px;height:12px;"></i> UI Design</div>
         <div class="proj-title">UI Designs</div>
         <div class="proj-sub">Website & interface concepts</div>
       </div>
-    </div>
+    </a>
 
-    <div class="proj-card reveal" onclick="openModal('portfolio')">
+    <a href="https://www.behance.net/gallery/157979857/Graphic-Design-Portfolio" target="_blank" class="proj-card reveal">
       <div class="proj-img">
         <img src="https://mir-s3-cdn-cf.behance.net/projects/404/14010a157979857.Y3JvcCwxMzgwLDEwODAsMCww.jpg" alt="Graphic Design Portfolio">
-        <div class="proj-overlay">↗</div>
+        <div class="proj-overlay">
+          <i data-lucide="external-link" style="width:24px;height:24px;stroke:#fff;stroke-width:1.5;fill:none;"></i>
+          View on Behance
+        </div>
       </div>
       <div class="proj-info">
-        <div class="proj-cat">Portfolio</div>
+        <div class="proj-cat"><i data-lucide="folder" class="icon" style="width:12px;height:12px;"></i> Portfolio</div>
         <div class="proj-title">Graphic Design Portfolio</div>
         <div class="proj-sub">Assorted creative work</div>
       </div>
-    </div>
+    </a>
 
   </div>
 </section>
@@ -1031,19 +1147,19 @@
 
 <!-- EDUCATION -->
 <section id="education">
-  <p class="section-label reveal">Academic Background</p>
+  <p class="section-label reveal"><i data-lucide="graduation-cap" class="icon" style="width:14px;height:14px;"></i> Academic Background</p>
   <h2 class="section-title reveal">Education</h2>
 
   <div class="edu-grid">
     <div class="edu-card reveal">
-      <div class="edu-period">2017 — 2021</div>
-      <div class="edu-institution">Techno India NJR Institute of Technology</div>
-      <div class="edu-degree">Engineering — Rajasthan, India</div>
+      <div class="edu-period"><i data-lucide="calendar" class="icon" style="width:13px;height:13px;"></i> 2017 — 2021</div>
+      <div class="edu-institution"><i data-lucide="building" class="icon" style="width:18px;height:18px;"></i> Techno India NJR Institute of Technology</div>
+      <div class="edu-degree"><i data-lucide="map-pin" class="icon" style="width:13px;height:13px;stroke:var(--muted);"></i> Engineering — Rajasthan, India</div>
     </div>
     <div class="edu-card reveal">
-      <div class="edu-period">2015 — 2017</div>
-      <div class="edu-institution">Guru Nanak Public Sr. Sc. School</div>
-      <div class="edu-degree">Senior Secondary Education</div>
+      <div class="edu-period"><i data-lucide="calendar" class="icon" style="width:13px;height:13px;"></i> 2015 — 2017</div>
+      <div class="edu-institution"><i data-lucide="school" class="icon" style="width:18px;height:18px;"></i> Guru Nanak Public Sr. Sc. School</div>
+      <div class="edu-degree"><i data-lucide="book-open" class="icon" style="width:13px;height:13px;stroke:var(--muted);"></i> Senior Secondary Education</div>
     </div>
   </div>
 </section>
@@ -1051,8 +1167,9 @@
 <div class="section-divider"></div>
 
 <!-- CONTACT -->
+<!-- ✅ CHANGE: Added Instagram link -->
 <section id="contact">
-  <p class="section-label reveal">Get In Touch</p>
+  <p class="section-label reveal"><i data-lucide="mail" class="icon" style="width:14px;height:14px;"></i> Get In Touch</p>
   <h2 class="section-title reveal">Contact</h2>
 
   <div class="contact-inner">
@@ -1063,54 +1180,69 @@
 
       <div class="contact-links">
         <a href="mailto:mohit.98.kothari@gmail.com" class="contact-link">
-          <div class="contact-icon">✉️</div>
+          <div class="contact-icon"><i data-lucide="mail" style="width:20px;height:20px;stroke:#fff;stroke-width:1.5;fill:none;"></i></div>
           <div class="contact-link-text">
             <small>Email</small>
             <span>mohit.98.kothari@gmail.com</span>
           </div>
         </a>
         <a href="tel:6376118698" class="contact-link">
-          <div class="contact-icon">📞</div>
+          <div class="contact-icon"><i data-lucide="phone" style="width:20px;height:20px;stroke:#fff;stroke-width:1.5;fill:none;"></i></div>
           <div class="contact-link-text">
             <small>Phone</small>
             <span>+91 6376118698</span>
           </div>
         </a>
         <a href="https://www.behance.net/montykothari" target="_blank" class="contact-link">
-          <div class="contact-icon">🎨</div>
+          <div class="contact-icon"><i data-lucide="palette" style="width:20px;height:20px;stroke:#fff;stroke-width:1.5;fill:none;"></i></div>
           <div class="contact-link-text">
             <small>Behance Portfolio</small>
             <span>behance.net/montykothari</span>
           </div>
         </a>
         <a href="http://linkedin.com/in/mohit1198/" target="_blank" class="contact-link">
-          <div class="contact-icon">💼</div>
+          <div class="contact-icon"><i data-lucide="linkedin" style="width:20px;height:20px;stroke:#fff;stroke-width:1.5;fill:none;"></i></div>
           <div class="contact-link-text">
             <small>LinkedIn</small>
             <span>linkedin.com/in/mohit1198</span>
           </div>
         </a>
+        <!-- ✅ NEW: Instagram link -->
+        <a href="https://www.instagram.com/moh_inventory/?hl=en" target="_blank" class="contact-link">
+          <div class="contact-icon"><i data-lucide="instagram" style="width:20px;height:20px;stroke:#fff;stroke-width:1.5;fill:none;"></i></div>
+          <div class="contact-link-text">
+            <small>Instagram</small>
+            <span>@moh_inventory</span>
+          </div>
+        </a>
       </div>
     </div>
 
+    <!-- ✅ CHANGE: Contact form now uses EmailJS to send real emails -->
     <div class="contact-form reveal">
-      <div class="form-title">Send a Message</div>
-      <div class="form-group">
-        <label>YOUR NAME</label>
-        <input type="text" placeholder="e.g. Raj Sharma">
+      <div class="form-title">
+        <i data-lucide="send" class="icon" style="width:18px;height:18px;"></i>
+        Send a Message
       </div>
-      <div class="form-group">
-        <label>EMAIL ADDRESS</label>
-        <input type="email" placeholder="you@example.com">
-      </div>
-      <div class="form-group">
-        <label>MESSAGE</label>
-        <textarea placeholder="Tell me about your project..."></textarea>
-      </div>
-      <button class="btn-primary" style="width:100%; justify-content:center;" onclick="handleFormSubmit()">
-        Send Message
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8l10 0M8 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </button>
+      <form id="contactForm">
+        <div class="form-group">
+          <label><i data-lucide="user" style="width:12px;height:12px;stroke:var(--muted);stroke-width:1.5;fill:none;display:inline;vertical-align:middle;margin-right:4px;"></i> YOUR NAME</label>
+          <input type="text" name="from_name" placeholder="e.g. Raj Sharma" required>
+        </div>
+        <div class="form-group">
+          <label><i data-lucide="at-sign" style="width:12px;height:12px;stroke:var(--muted);stroke-width:1.5;fill:none;display:inline;vertical-align:middle;margin-right:4px;"></i> EMAIL ADDRESS</label>
+          <input type="email" name="from_email" placeholder="you@example.com" required>
+        </div>
+        <div class="form-group">
+          <label><i data-lucide="message-square" style="width:12px;height:12px;stroke:var(--muted);stroke-width:1.5;fill:none;display:inline;vertical-align:middle;margin-right:4px;"></i> MESSAGE</label>
+          <textarea name="message" placeholder="Tell me about your project..." required></textarea>
+        </div>
+        <button type="submit" class="btn-primary" id="submitBtn" style="width:100%; justify-content:center;">
+          <i data-lucide="send" style="width:16px;height:16px;stroke:#fff;stroke-width:1.5;fill:none;"></i>
+          Send Message
+        </button>
+        <div class="form-status" id="formStatus"></div>
+      </form>
     </div>
   </div>
 </section>
@@ -1118,23 +1250,31 @@
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">Mohit Kothari.</div>
-  <div class="footer-copy">© 2026 - 27 Mohit Kothari · Graphic Designer · Udaipur, India</div>
-  <div style="display:flex;gap:1rem;">
-    <a href="https://www.behance.net/montykothari" target="_blank" style="color:var(--muted);font-size:0.8rem;text-decoration:none;">Behance</a>
-    <a href="http://linkedin.com/in/mohit1198/" target="_blank" style="color:var(--muted);font-size:0.8rem;text-decoration:none;">LinkedIn</a>
+  <div class="footer-copy">© 2025 Mohit Kothari · Graphic Designer · Udaipur, India</div>
+  <div class="footer-links">
+    <a href="https://www.behance.net/montykothari" target="_blank"><i data-lucide="palette" class="icon" style="width:14px;height:14px;"></i> Behance</a>
+    <a href="http://linkedin.com/in/mohit1198/" target="_blank"><i data-lucide="linkedin" class="icon" style="width:14px;height:14px;"></i> LinkedIn</a>
+    <a href="https://www.instagram.com/moh_inventory/?hl=en" target="_blank"><i data-lucide="instagram" class="icon" style="width:14px;height:14px;"></i> Instagram</a>
   </div>
 </footer>
 
-<!-- MODAL -->
+<!-- MODAL (kept for potential use) -->
 <div class="modal-overlay" id="modal" onclick="closeModal(event)">
   <div class="modal-box">
-    <button class="modal-close" onclick="closeModal(null, true)">✕</button>
+    <button class="modal-close" onclick="closeModal(null, true)">
+      <i data-lucide="x" style="width:16px;height:16px;stroke:var(--muted);stroke-width:1.5;fill:none;"></i>
+    </button>
     <div id="modalContent"></div>
   </div>
 </div>
 
 <script>
+// Initialize Lucide icons
+lucide.createIcons();
+
+// =============================================
 // CURSOR
+// =============================================
 const cursor = document.getElementById('cursor');
 const ring = document.getElementById('cursorRing');
 let mx=0,my=0,rx=0,ry=0;
@@ -1153,24 +1293,29 @@ document.querySelectorAll('a,button,.proj-card,.skill-card,.contact-link').forEa
   el.addEventListener('mouseleave', () => { });
 });
 
-// THEME
+// =============================================
+// THEME TOGGLE
+// =============================================
 const html = document.documentElement;
 document.getElementById('themeToggle').addEventListener('click', () => {
   html.dataset.theme = html.dataset.theme === 'dark' ? 'light' : 'dark';
 });
 
+// =============================================
 // HAMBURGER
+// =============================================
 document.getElementById('hamburger').addEventListener('click', () => {
   document.getElementById('mobileNav').classList.toggle('open');
 });
 function closeMobileNav() { document.getElementById('mobileNav').classList.remove('open'); }
 
+// =============================================
 // SCROLL REVEAL
+// =============================================
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) {
       e.target.classList.add('visible');
-      // Skill bars
       const bar = e.target.querySelector('.skill-bar-fill');
       if (bar) bar.style.width = bar.dataset.width + '%';
     }
@@ -1179,7 +1324,6 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.reveal, .exp-item, .proj-card, .edu-card').forEach(el => observer.observe(el));
 
-// Also trigger skill bars when section enters
 const skillObserver = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (e.isIntersecting) {
@@ -1192,75 +1336,9 @@ const skillObserver = new IntersectionObserver(entries => {
 const skillsSection = document.getElementById('skills');
 if (skillsSection) skillObserver.observe(skillsSection);
 
-// MODAL DATA
-const projects = {
-  social2: {
-    title: 'Social Media Posts 2',
-    cat: 'Social Media Design',
-    img: 'https://mir-s3-cdn-cf.behance.net/projects/404/adcc36198378981.Y3JvcCwxMDYyLDgzMCwwLDA.png',
-    desc: 'Social Media Grid for Scavin Eyewear — photographed, upscaled, and retouched product images with a minimalistic aesthetic and short taglines. Also includes work for Innexia (Home Automation), Airawat (Real Estate), and Nivaya Jewellery.',
-    link: 'https://www.behance.net/gallery/198378981/Social-Media-Posts-2',
-    tools: ['Adobe Photoshop', 'Adobe Illustrator']
-  },
-  logo: {
-    title: 'Logo Design',
-    cat: 'Brand Identity',
-    img: 'https://mir-s3-cdn-cf.behance.net/projects/404/e7e050167398395.Y3JvcCw4MDgsNjMyLDAsMA.jpg',
-    desc: 'A curated collection of logo designs for various clients and industries, demonstrating versatility in creating strong brand identities.',
-    link: 'https://www.behance.net/gallery/167398395/Logo-Design',
-    tools: ['Adobe Illustrator']
-  },
-  social1: {
-    title: 'Social Media Post',
-    cat: 'Social Media Design',
-    img: 'https://mir-s3-cdn-cf.behance.net/projects/404/23137b178988357.Y3JvcCw4MDgsNjMyLDAsMA.jpg',
-    desc: 'First series of social media design work showcasing brand-consistent posts with strong typography and visual hierarchy.',
-    link: 'https://www.behance.net/gallery/178988357/Social-Media-Post',
-    tools: ['Adobe Photoshop', 'Adobe Illustrator']
-  },
-  menu: {
-    title: 'Menu Card',
-    cat: 'Print Design',
-    img: 'https://mir-s3-cdn-cf.behance.net/projects/404/a4f352172143067.Y3JvcCwzMDQ1LDIzODIsMTU4LDA.jpg',
-    desc: 'Restaurant menu card design with a focus on readability, aesthetic layout, and brand tone.',
-    link: 'https://www.behance.net/gallery/172143067/Menu-Card',
-    tools: ['Adobe Illustrator', 'Adobe Photoshop']
-  },
-  ui: {
-    title: 'UI Designs',
-    cat: 'UI Design',
-    img: 'https://mir-s3-cdn-cf.behance.net/projects/404/d55232163367101.Y3JvcCwxMTgzLDkyNSw0ODAsMjU3.jpg',
-    desc: 'Web and interface UI concepts exploring layout, color, and modern design principles.',
-    link: 'https://www.behance.net/gallery/163367101/UI-designs',
-    tools: ['Adobe Photoshop', 'Figma']
-  },
-  portfolio: {
-    title: 'Graphic Design Portfolio',
-    cat: 'Portfolio',
-    img: 'https://mir-s3-cdn-cf.behance.net/projects/404/14010a157979857.Y3JvcCwxMzgwLDEwODAsMCww.jpg',
-    desc: 'A broad portfolio piece showcasing diverse graphic design work across multiple categories and clients.',
-    link: 'https://www.behance.net/gallery/157979857/Graphic-Design-Portfolio',
-    tools: ['Adobe Illustrator', 'Adobe Photoshop']
-  }
-};
-
-function openModal(id) {
-  const p = projects[id]; if (!p) return;
-  document.getElementById('modalContent').innerHTML = `
-    <div style="margin-bottom:1.5rem">
-      <div style="font-size:0.72rem;color:var(--accent1);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.5rem">${p.cat}</div>
-      <h3 style="font-family:Syne,sans-serif;font-weight:700;font-size:1.8rem;margin-bottom:0.5rem">${p.title}</h3>
-    </div>
-    <img src="${p.img}" alt="${p.title}" style="width:100%;border-radius:12px;margin-bottom:1.5rem;display:block;">
-    <p style="color:var(--muted);line-height:1.8;margin-bottom:1.5rem">${p.desc}</p>
-    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1.5rem">
-      ${p.tools.map(t=>`<span style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:4px 12px;font-size:0.78rem;color:var(--muted)">${t}</span>`).join('')}
-    </div>
-    <a href="${p.link}" target="_blank" class="btn-primary" style="display:inline-flex">View on Behance ↗</a>
-  `;
-  document.getElementById('modal').classList.add('open');
-}
-
+// =============================================
+// MODAL
+// =============================================
 function closeModal(e, force) {
   if (force || (e && e.target === document.getElementById('modal'))) {
     document.getElementById('modal').classList.remove('open');
@@ -1268,16 +1346,190 @@ function closeModal(e, force) {
 }
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(null, true); });
 
-// FORM
-function handleFormSubmit() {
-  const btn = event.target;
-  btn.textContent = '✓ Message Sent!';
-  btn.style.background = 'linear-gradient(135deg,#4ade80,#22d3ee)';
-  setTimeout(() => {
-    btn.innerHTML = 'Send Message <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8l10 0M8 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-    btn.style.background = '';
-  }, 3000);
+// =============================================
+// ✅ EMAILJS - CONTACT FORM (sends real emails)
+// =============================================
+/*
+ * HOW TO SET UP EmailJS (FREE - 200 emails/month):
+ *
+ * 1. Go to https://www.emailjs.com/ and create a free account
+ * 2. Add an Email Service (Gmail) — connect your kotharim401@gmail.com
+ *    - Note down your SERVICE ID (e.g., "service_xxxxxxx")
+ * 3. Create an Email Template with these variables:
+ *    - {{from_name}} — sender's name
+ *    - {{from_email}} — sender's email
+ *    - {{message}} — the message
+ *    - Set "To Email" as: kotharim401@gmail.com
+ *    - Note down your TEMPLATE ID (e.g., "template_xxxxxxx")
+ * 4. Go to Account > API Keys and copy your PUBLIC KEY
+ * 5. Replace the three values below with your actual IDs
+ */
+
+const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY_HERE';    // ← Replace with your EmailJS public key
+const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID_HERE';    // ← Replace with your EmailJS service ID
+const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID_HERE';  // ← Replace with your EmailJS template ID
+
+// Initialize EmailJS
+(function() {
+  if (typeof emailjs !== 'undefined') {
+    emailjs.init(EMAILJS_PUBLIC_KEY);
+  }
+})();
+
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const btn = document.getElementById('submitBtn');
+  const status = document.getElementById('formStatus');
+  const form = this;
+
+  // Get form values
+  const name = form.from_name.value.trim();
+  const email = form.from_email.value.trim();
+  const message = form.message.value.trim();
+
+  if (!name || !email || !message) {
+    status.className = 'form-status error';
+    status.innerHTML = '<i data-lucide="alert-circle" style="width:14px;height:14px;stroke:currentColor;stroke-width:1.5;fill:none;display:inline;vertical-align:middle;margin-right:6px;"></i> Please fill in all fields.';
+    lucide.createIcons();
+    return;
+  }
+
+  // Show loading state
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner" style="width:16px;height:16px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin 0.6s linear infinite;display:inline-block;"></span> Sending...';
+
+  // Check if EmailJS is configured
+  if (EMAILJS_PUBLIC_KEY === 'YOUR_PUBLIC_KEY_HERE') {
+    // Fallback: open mailto link if EmailJS isn't set up yet
+    const subject = encodeURIComponent(`Portfolio Contact from ${name}`);
+    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+    window.open(`mailto:kotharim401@gmail.com?subject=${subject}&body=${body}`, '_blank');
+
+    btn.disabled = false;
+    btn.innerHTML = '<i data-lucide="check" style="width:16px;height:16px;stroke:#fff;stroke-width:1.5;fill:none;"></i> Opening Email Client...';
+    btn.style.background = 'linear-gradient(135deg,#4ade80,#22d3ee)';
+    status.className = 'form-status success';
+    status.innerHTML = '<i data-lucide="info" style="width:14px;height:14px;stroke:currentColor;stroke-width:1.5;fill:none;display:inline;vertical-align:middle;margin-right:6px;"></i> Email client opened. To enable direct sending, set up EmailJS (see code comments).';
+    lucide.createIcons();
+
+    setTimeout(() => {
+      btn.innerHTML = '<i data-lucide="send" style="width:16px;height:16px;stroke:#fff;stroke-width:1.5;fill:none;"></i> Send Message';
+      btn.style.background = '';
+      status.className = 'form-status';
+      lucide.createIcons();
+    }, 5000);
+    return;
+  }
+
+  // Send via EmailJS
+  emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+    from_name: name,
+    from_email: email,
+    message: message,
+    to_email: 'kotharim401@gmail.com'
+  }).then(function() {
+    // Success
+    btn.disabled = false;
+    btn.innerHTML = '<i data-lucide="check" style="width:16px;height:16px;stroke:#fff;stroke-width:1.5;fill:none;"></i> Message Sent!';
+    btn.style.background = 'linear-gradient(135deg,#4ade80,#22d3ee)';
+    status.className = 'form-status success';
+    status.innerHTML = '<i data-lucide="check-circle" style="width:14px;height:14px;stroke:currentColor;stroke-width:1.5;fill:none;display:inline;vertical-align:middle;margin-right:6px;"></i> Thank you! Your message has been sent successfully.';
+    form.reset();
+    lucide.createIcons();
+
+    setTimeout(() => {
+      btn.innerHTML = '<i data-lucide="send" style="width:16px;height:16px;stroke:#fff;stroke-width:1.5;fill:none;"></i> Send Message';
+      btn.style.background = '';
+      status.className = 'form-status';
+      lucide.createIcons();
+    }, 5000);
+  }, function(error) {
+    // Error
+    btn.disabled = false;
+    btn.innerHTML = '<i data-lucide="send" style="width:16px;height:16px;stroke:#fff;stroke-width:1.5;fill:none;"></i> Send Message';
+    status.className = 'form-status error';
+    status.innerHTML = '<i data-lucide="alert-circle" style="width:14px;height:14px;stroke:currentColor;stroke-width:1.5;fill:none;display:inline;vertical-align:middle;margin-right:6px;"></i> Oops! Something went wrong. Please try emailing directly.';
+    lucide.createIcons();
+    console.error('EmailJS Error:', error);
+  });
+});
+
+// =============================================
+// ✅ BEHANCE DYNAMIC PORTFOLIO LOADER
+// =============================================
+/*
+ * Since Behance's public API was deprecated, we use an RSS-to-JSON approach.
+ * This fetches your latest Behance projects automatically.
+ *
+ * Option 1 (Recommended): Use a CORS proxy + Behance RSS feed
+ * Option 2: Use a serverless function (Vercel/Netlify) to proxy Behance data
+ *
+ * The function below attempts to load from Behance RSS.
+ * If it fails, the static fallback cards above remain visible.
+ */
+
+async function loadBehanceProjects() {
+  const BEHANCE_USER = 'montykothari';
+  const RSS_URL = `https://www.behance.net/feeds/user?username=${BEHANCE_USER}`;
+  const PROXY_URL = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(RSS_URL)}`;
+
+  try {
+    const response = await fetch(PROXY_URL);
+    if (!response.ok) throw new Error('RSS fetch failed');
+    const data = await response.json();
+
+    if (data.status === 'ok' && data.items && data.items.length > 0) {
+      const grid = document.getElementById('portfolioGrid');
+      grid.innerHTML = ''; // Clear static cards
+
+      data.items.forEach((item, index) => {
+        // Extract thumbnail from description HTML
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = item.description || '';
+        const img = tempDiv.querySelector('img');
+        const imgSrc = img ? img.src : '';
+
+        const card = document.createElement('a');
+        card.href = item.link;
+        card.target = '_blank';
+        card.className = `proj-card reveal${index === 0 ? ' featured' : ''}`;
+
+        card.innerHTML = `
+          <div class="proj-img">
+            ${imgSrc ? `<img src="${imgSrc}" alt="${item.title}">` : ''}
+            <div class="proj-overlay">
+              <i data-lucide="external-link" style="width:24px;height:24px;stroke:#fff;stroke-width:1.5;fill:none;"></i>
+              View on Behance
+            </div>
+          </div>
+          <div class="proj-info">
+            <div class="proj-cat"><i data-lucide="folder" class="icon" style="width:12px;height:12px;"></i> Behance Project</div>
+            <div class="proj-title">${item.title}</div>
+            <div class="proj-sub">${item.pubDate ? new Date(item.pubDate).toLocaleDateString('en-US', { year: 'numeric', month: 'short' }) : ''}</div>
+          </div>
+        `;
+
+        grid.appendChild(card);
+      });
+
+      // Re-initialize Lucide icons for dynamic content
+      lucide.createIcons();
+
+      // Re-observe for scroll animations
+      document.querySelectorAll('#portfolioGrid .proj-card').forEach(el => {
+        observer.observe(el);
+      });
+    }
+  } catch (err) {
+    // Silently fail — static fallback cards remain
+    console.log('Using static portfolio cards. Behance RSS unavailable:', err.message);
+  }
 }
+
+// Load Behance projects on page load
+loadBehanceProjects();
+
 </script>
 </body>
 </html>
