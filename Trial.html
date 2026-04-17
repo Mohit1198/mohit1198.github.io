@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mohit Kothari | Premium Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#0d0d0d;color:#fff;scroll-behavior:smooth}
+header{position:fixed;width:100%;top:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(10px);padding:15px 40px;z-index:1000}
+nav{display:flex;justify-content:space-between;align-items:center}
+nav a{color:#fff;text-decoration:none;margin-left:20px;font-size:14px;opacity:.8}
+nav a:hover{opacity:1}
+.logo{font-weight:700}
+section{padding:100px 40px}
+.hero{height:100vh;display:flex;flex-direction:column;justify-content:center}
+.hero h1{font-size:56px;background:linear-gradient(90deg,#fff,#888);-webkit-background-clip:text;color:transparent}
+.hero p{max-width:500px;color:#aaa;margin:20px 0}
+.btn{padding:12px 24px;border:1px solid #fff;background:none;color:#fff;margin-right:10px;cursor:pointer;border-radius:30px;transition:.3s}
+.btn:hover{background:#fff;color:#000}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px}
+.card{background:#111;padding:20px;border-radius:15px;border:1px solid #222;transition:.4s}
+.card:hover{transform:translateY(-8px);border-color:#555}
+h2{margin-bottom:40px;font-size:30px}
+.about{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.about img{width:100%;border-radius:20px;filter:grayscale(100%)}
+.skills .card{text-align:center}
+.portfolio img{width:100%;border-radius:10px;margin-bottom:10px}
+footer{text-align:center;padding:30px;background:#111;margin-top:50px;color:#777}
+@media(max-width:768px){.about{grid-template-columns:1fr}.hero h1{font-size:36px}}
+</style>
+</head>
+<body>
+<header>
+<nav>
+<div class="logo">Mohit Kothari</div>
+<div>
+<a href="#about">About</a>
+<a href="#skills">Skills</a>
+<a href="#experience">Experience</a>
+<a href="#portfolio">Work</a>
+<a href="#contact">Contact</a>
+</div>
+</nav>
+</header>
+
+<section class="hero">
+<h1>Designing Visual Experiences</h1>
+<p>I create bold, clean and impactful designs that help brands stand out and communicate better.</p>
+<div>
+<a href="#portfolio"><button class="btn">View Work</button></a>
+<a href="#contact"><button class="btn">Hire Me</button></a>
+</div>
+</section>
+
+<section id="about" class="about">
+<div>
+<h2>About Me</h2>
+<p>I’m Mohit Kothari, a graphic designer with 4+ years of experience creating social media creatives, branding, brochures, and UI designs. I’ve worked with agencies, startups, and freelance clients delivering impactful visuals.</p>
+</div>
+<div>
+<img src="https://via.placeholder.com/500" alt="profile">
+</div>
+</section>
+
+<section id="skills" class="skills">
+<h2>Skills</h2>
+<div class="grid">
+<div class="card">Adobe Photoshop<br>80%</div>
+<div class="card">Adobe Illustrator<br>70%</div>
+<div class="card">After Effects<br>40%</div>
+<div class="card">Canva<br>50%</div>
+</div>
+</section>
+
+<section id="experience">
+<h2>Experience</h2>
+<div class="grid">
+<div class="card">
+<h3>Spark Eighteen</h3>
+<p>Executive Graphic Designer</p>
+</div>
+<div class="card">
+<h3>Media F5</h3>
+<p>Graphic Designer</p>
+</div>
+<div class="card">
+<h3>PHP Poets</h3>
+<p>Graphic Designer</p>
+</div>
+<div class="card">
+<h3>Freelancing</h3>
+<p>Branding, Clinics, Social Media</p>
+</div>
+</div>
+</section>
+
+<section id="portfolio" class="portfolio">
+<h2>Selected Work</h2>
+<div class="grid">
+<a href="https://www.behance.net/montykothari" target="_blank" class="card">
+<img src="https://mir-s3-cdn-cf.behance.net/projects/404/" alt="project">
+<p>View Full Portfolio on Behance →</p>
+</a>
+<div class="card"><p>Branding Projects</p></div>
+<div class="card"><p>Social Media Designs</p></div>
+<div class="card"><p>Print & Brochure</p></div>
+</div>
+</section>
+
+<section id="contact">
+<h2>Contact</h2>
+<p>Email: mohit.98.kothari@gmail.com</p>
+<p>Phone: 6376118698</p>
+</section>
+
+<footer>
+<p>© 2026 Mohit Kothari</p>
+</footer>
+
+</body>
+</html>
