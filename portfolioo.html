@@ -688,18 +688,44 @@ async function loadBehanceProjects() {
 function renderPortfolio(projects) {
   const grid = document.getElementById('portfolioGrid');
   if (!grid) return;
-  grid.innerHTML = projects.map(p => `
-    <div class="proj-card reveal${p.featured ? ' featured' : ''}" style="cursor:pointer;" onclick="window.open('${p.url}', '_blank')">
-      <div class="proj-img" style="background:linear-gradient(135deg,var(--accent1),var(--accent2));min-height:200px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.9rem;text-align:center;padding:1rem;">
-        <span>${p.title}</span>
-      </div>
-      <div class="proj-info">
-        <h3>${p.title}</h3>
-        <p>Graphic Design</p>
-        <small>View on Behance</small>
-      </div>
-    </div>
-  `).join('');
+  
+  // Clear existing content
+  grid.innerHTML = '';
+  
+  // Add each project
+  projects.forEach((p, idx) => {
+    const card = document.createElement('a');
+    card.className = `proj-card${p.featured ? ' featured' : ''} reveal`;
+    card.href = p.url;
+    card.target = '_blank';
+    
+    const img = document.createElement('div');
+    img.className = 'proj-img';
+    img.style.background = 'linear-gradient(135deg,var(--accent1),var(--accent2))';
+    img.style.minHeight = '200px';
+    img.style.display = 'flex';
+    img.style.alignItems = 'center';
+    img.style.justifyContent = 'center';
+    img.style.color = '#fff';
+    img.innerHTML = `<span style="font-size:0.9rem;text-align:center;">${p.title}</span>`;
+    
+    const info = document.createElement('div');
+    info.className = 'proj-info';
+    info.innerHTML = `
+      <h3>${p.title}</h3>
+      <p>Graphic Design</p>
+      <small>View on Behance</small>
+    `;
+    
+    card.appendChild(img);
+    card.appendChild(info);
+    grid.appendChild(card);
+    
+    // Trigger reveal animation
+    setTimeout(() => {
+      card.classList.add('visible');
+    }, idx * 50);
+  });
 }
 
 
@@ -819,6 +845,14 @@ async function handleFormSubmit(e) {
 const style = document.createElement('style');
 style.textContent = '@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }';
 document.head.appendChild(style);
+
+
+// Load projects immediately on page ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', loadBehanceProjects);
+} else {
+  loadBehanceProjects();
+}
 </script>
 </body>
 </html>
