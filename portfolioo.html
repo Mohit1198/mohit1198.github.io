@@ -56,8 +56,11 @@
     font-family:'Syne',sans-serif;font-weight:800;font-size:1.3rem;
     background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text; }
   .nav-links { display:flex;gap:2.2rem;list-style:none;align-items:center; }
-  .nav-links a { color:var(--muted);text-decoration:none;font-size:0.82rem;font-weight:400;letter-spacing:0.05em;text-transform:uppercase;transition:color 0.3s; }
+  .nav-links a { color:var(--muted);text-decoration:none;font-size:0.82rem;font-weight:400;letter-spacing:0.05em;text-transform:uppercase;transition:color 0.3s;position:relative;padding-bottom:6px; }
   .nav-links a:hover { color:var(--text); }
+  .nav-links a.active { color:var(--accent1);font-weight:600; }
+  .nav-links a.active::after { content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent1),var(--accent2));box-shadow:0 0 12px rgba(124,92,252,0.6);animation:slideIn 0.4s cubic-bezier(0.16,1,0.3,1); }
+  @keyframes slideIn { from { width:0;left:50%; } to { width:100%;left:0; } }
   .nav-right { display:flex;align-items:center;gap:0.8rem; }
 
 
@@ -633,6 +636,40 @@
 
 <script>
 // CURSOR
+
+// ─── ACTIVE NAV HIGHLIGHT ──────────────────────
+function updateActiveNav() {
+  const sections = ['hero', 'about', 'skills', 'experience', 'portfolio', 'education', 'contact'];
+  const navLinks = document.querySelectorAll('.nav-links a');
+  
+  // Find which section is currently in view
+  let activeSection = 'hero';
+  for (const section of sections) {
+    const element = document.getElementById(section);
+    if (element) {
+      const rect = element.getBoundingClientRect();
+      if (rect.top <= 150) {
+        activeSection = section;
+      }
+    }
+  }
+  
+  // Update active class on nav links
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('href') === `#${activeSection}`) {
+      link.classList.add('active');
+    }
+  });
+}
+
+// Update on page load
+window.addEventListener('load', updateActiveNav);
+// Update on scroll
+window.addEventListener('scroll', updateActiveNav, { passive: true });
+// Update on hash change (when clicking nav links)
+window.addEventListener('hashchange', updateActiveNav);
+
 const cursor = document.getElementById('cursor');
 const ring = document.getElementById('cursorRing');
 let mx=0,my=0,rx=0,ry=0;
