@@ -654,164 +654,70 @@ const BEHANCE_PROJECTS = {
 };
 
 async function loadBehanceProjects() {
-  try {
-    console.log('✅ Portfolio projects loaded (6 featured works)');
-    
-    const projects = [
-      { 
-        title: 'Social Media Posts 2', 
-        featured: true, 
-        url: 'https://www.behance.net/montykothari/projects/198378981',
-        thumb: 'https://mir-s3-cdn-cf.behance.net/projects/404/adcc36198378981.Y3JvcCwxMDYyLDgzMCwwLDA.png'
-      },
-      { 
-        title: 'Logo Design', 
-        featured: false, 
-        url: 'https://www.behance.net/montykothari/projects/167398395',
-        thumb: 'https://mir-s3-cdn-cf.behance.net/projects/404/a25a3e167398395.jpg'
-      },
-      { 
-        title: 'Social Media Post', 
-        featured: false, 
-        url: 'https://www.behance.net/montykothari/projects/178988357',
-        thumb: 'https://mir-s3-cdn-cf.behance.net/projects/404/c3d4e5178988357.jpg'
-      },
-      { 
-        title: 'Menu Card', 
-        featured: false, 
-        url: 'https://www.behance.net/montykothari/projects/172143067',
-        thumb: 'https://mir-s3-cdn-cf.behance.net/projects/404/d7e8f9172143067.jpg'
-      },
-      { 
-        title: 'UI Designs', 
-        featured: false, 
-        url: 'https://www.behance.net/montykothari/projects/163367101',
-        thumb: 'https://mir-s3-cdn-cf.behance.net/projects/404/e1f2a3163367101.jpg'
-      },
-      { 
-        title: 'Graphic Design Portfolio', 
-        featured: false, 
-        url: 'https://www.behance.net/montykothari/projects/157979857',
-        thumb: 'https://mir-s3-cdn-cf.behance.net/projects/404/f5a6b7157979857.jpg'
-      }
-    ];
-    
-    renderPortfolio(projects);
-    
-  } catch(e) {
-    console.log('Portfolio loaded');
-    const projects = [
-      { 
-        title: 'Social Media Posts 2', 
-        featured: true, 
-        url: 'https://www.behance.net/montykothari/projects/198378981',
-        thumb: 'https://mir-s3-cdn-cf.behance.net/projects/404/adcc36198378981.Y3JvcCwxMDYyLDgzMCwwLDA.png'
-      },
-      { 
-        title: 'Logo Design', 
-        featured: false, 
-        url: 'https://www.behance.net/montykothari/projects/167398395',
-        thumb: 'https://mir-s3-cdn-cf.behance.net/projects/404/a25a3e167398395.jpg'
-      },
-      { 
-        title: 'Social Media Post', 
-        featured: false, 
-        url: 'https://www.behance.net/montykothari/projects/178988357',
-        thumb: 'https://mir-s3-cdn-cf.behance.net/projects/404/c3d4e5178988357.jpg'
-      },
-      { 
-        title: 'Menu Card', 
-        featured: false, 
-        url: 'https://www.behance.net/montykothari/projects/172143067',
-        thumb: 'https://mir-s3-cdn-cf.behance.net/projects/404/d7e8f9172143067.jpg'
-      },
-      { 
-        title: 'UI Designs', 
-        featured: false, 
-        url: 'https://www.behance.net/montykothari/projects/163367101',
-        thumb: 'https://mir-s3-cdn-cf.behance.net/projects/404/e1f2a3163367101.jpg'
-      },
-      { 
-        title: 'Graphic Design Portfolio', 
-        featured: false, 
-        url: 'https://www.behance.net/montykothari/projects/157979857',
-        thumb: 'https://mir-s3-cdn-cf.behance.net/projects/404/f5a6b7157979857.jpg'
-      }
-    ];
-    renderPortfolio(projects);
-  }
+  const projects = [
+    { 
+      title: 'Social Media Posts 2', 
+      featured: true, 
+      url: 'https://www.behance.net/montykothari/projects/198378981',
+      thumb: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImdyYWQxIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojN2M1Y2ZjO3N0b3Atb3BhY2l0eToxIiAvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6IzRmOWZmZjtzdG9wLW9wYWNpdHk6MSIgLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI1MCIgZmlsbD0idXJsKCNncmFkMSkiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZm9udC1zaXplPSIyNCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5Tb2NpYWwgTWVkaWEgUG9zdHMgMjwvdGV4dD48L3N2Zz4='
+    },
+    { 
+      title: 'Logo Design', 
+      featured: false, 
+      url: 'https://www.behance.net/montykothari/projects/167398395',
+      thumb: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImdyYWQyIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojN2M1Y2ZjO3N0b3Atb3BhY2l0eToxIiAvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6IzRmOWZmZjtzdG9wLW9wYWNpdHk6MSIgLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI1MCIgZmlsbD0idXJsKCNncmFkMikiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZm9udC1zaXplPSIyNCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5Mb2dvIERlc2lnbjwvdGV4dD48L3N2Zz4='
+    },
+    { 
+      title: 'Social Media Post', 
+      featured: false, 
+      url: 'https://www.behance.net/montykothari/projects/178988357',
+      thumb: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImdyYWQzIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojN2M1Y2ZjO3N0b3Atb3BhY2l0eToxIiAvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6IzRmOWZmZjtzdG9wLW9wYWNpdHk6MSIgLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI1MCIgZmlsbD0idXJsKCNncmFkMykiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZm9udC1zaXplPSIyNCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5Tb2NpYWwgTWVkaWEgUG9zdDwvdGV4dD48L3N2Zz4='
+    },
+    { 
+      title: 'Menu Card', 
+      featured: false, 
+      url: 'https://www.behance.net/montykothari/projects/172143067',
+      thumb: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImdyYWQ0IiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojN2M1Y2ZjO3N0b3Atb3BhY2l0eToxIiAvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6IzRmOWZmZjtzdG9wLW9wYWNpdHk6MSIgLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI1MCIgZmlsbD0idXJsKCNncmFkNCkiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZm9udC1zaXplPSIyNCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5NZW51IENhcmQ8L3RleHQ+PC9zdmc+'
+    },
+    { 
+      title: 'UI Designs', 
+      featured: false, 
+      url: 'https://www.behance.net/montykothari/projects/163367101',
+      thumb: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImdyYWQ1IiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojN2M1Y2ZjO3N0b3Atb3BhY2l0eToxIiAvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6IzRmOWZmZjtzdG9wLW9wYWNpdHk6MSIgLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI1MCIgZmlsbD0idXJsKCNncmFkNSkiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZm9udC1zaXplPSIyNCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5VSiBEZXNpZ25zPC90ZXh0Pjwvc3ZnPg=='
+    },
+    { 
+      title: 'Graphic Design Portfolio', 
+      featured: false, 
+      url: 'https://www.behance.net/montykothari/projects/157979857',
+      thumb: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImdyYWQ2IiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojN2M1Y2ZjO3N0b3Atb3BhY2l0eToxIiAvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6IzRmOWZmZjtzdG9wLW9wYWNpdHk6MSIgLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI1MCIgZmlsbD0idXJsKCNncmFkNikiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZm9udC1zaXplPSIyNCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5HcmFwaGljIERlc2lnbiBQb3J0Zm9saW88L3RleHQ+PC9zdmc+'
+    }
+  ];
+  
+  renderPortfolio(projects);
 }
 function renderPortfolio(projects) {
   const grid = document.getElementById('portfolioGrid');
   if (!grid) return;
   
-  grid.innerHTML = '';
+  grid.innerHTML = projects.map((p, idx) => `
+    <a class="proj-card${p.featured ? ' featured' : ''} reveal" href="${p.url}" target="_blank">
+      <div class="proj-img" style="background: linear-gradient(135deg, var(--accent1), var(--accent2));">
+        <img src="${p.thumb}" alt="${p.title}" loading="lazy" style="width:100%; height:100%; object-fit:cover;" onerror="this.parentElement.style.background='linear-gradient(135deg, var(--accent1), var(--accent2))';">
+        <div class="proj-overlay">
+          <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </div>
+      </div>
+      <div class="proj-info">
+        <h3>${p.title}</h3>
+        <p>Graphic Design</p>
+        <small>View on Behance</small>
+      </div>
+    </a>
+  `).join('');
   
-  projects.forEach((p, idx) => {
-    const card = document.createElement('a');
-    card.className = `proj-card${p.featured ? ' featured' : ''} reveal`;
-    card.href = p.url;
-    card.target = '_blank';
-    
-    const img = document.createElement('div');
-    img.className = 'proj-img';
-    img.style.position = 'relative';
-    img.style.overflow = 'hidden';
-    img.style.minHeight = '200px';
-    img.style.background = 'linear-gradient(135deg,var(--accent1),var(--accent2))';
-    img.style.display = 'flex';
-    img.style.alignItems = 'center';
-    img.style.justifyContent = 'center';
-    
-    if (p.thumb) {
-      const imgElement = document.createElement('img');
-      imgElement.src = p.thumb;
-      imgElement.alt = p.title;
-      imgElement.loading = 'lazy';
-      imgElement.style.width = '100%';
-      imgElement.style.height = '100%';
-      imgElement.style.objectFit = 'cover';
-      imgElement.onerror = function() {
-        this.style.display = 'none';
-      };
-      img.appendChild(imgElement);
-    }
-    
-    // Text fallback (shows if image fails)
-    const textFallback = document.createElement('div');
-    textFallback.style.position = 'absolute';
-    textFallback.style.inset = '0';
-    textFallback.style.display = 'flex';
-    textFallback.style.alignItems = 'center';
-    textFallback.style.justifyContent = 'center';
-    textFallback.style.color = '#fff';
-    textFallback.style.fontSize = '0.9rem';
-    textFallback.style.textAlign = 'center';
-    textFallback.style.padding = '1rem';
-    textFallback.style.background = 'rgba(0,0,0,0.3)';
-    textFallback.innerHTML = `<span>${p.title}</span>`;
-    img.appendChild(textFallback);
-    
-    const overlay = document.createElement('div');
-    overlay.className = 'proj-overlay';
-    overlay.innerHTML = `<svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>`;
-    img.appendChild(overlay);
-    
-    const info = document.createElement('div');
-    info.className = 'proj-info';
-    info.innerHTML = `
-      <h3>${p.title}</h3>
-      <p>Graphic Design</p>
-      <small>View on Behance</small>
-    `;
-    
-    card.appendChild(img);
-    card.appendChild(info);
-    grid.appendChild(card);
-    
-    setTimeout(() => {
-      card.classList.add('visible');
-    }, idx * 50);
+  // Trigger animations
+  document.querySelectorAll('.proj-card.reveal').forEach((el, idx) => {
+    setTimeout(() => el.classList.add('visible'), idx * 50);
   });
 }
 
