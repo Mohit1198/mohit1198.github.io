@@ -755,6 +755,13 @@ function renderPortfolio(projects) {
     
     const img = document.createElement('div');
     img.className = 'proj-img';
+    img.style.position = 'relative';
+    img.style.overflow = 'hidden';
+    img.style.minHeight = '200px';
+    img.style.background = 'linear-gradient(135deg,var(--accent1),var(--accent2))';
+    img.style.display = 'flex';
+    img.style.alignItems = 'center';
+    img.style.justifyContent = 'center';
     
     if (p.thumb) {
       const imgElement = document.createElement('img');
@@ -764,16 +771,26 @@ function renderPortfolio(projects) {
       imgElement.style.width = '100%';
       imgElement.style.height = '100%';
       imgElement.style.objectFit = 'cover';
+      imgElement.onerror = function() {
+        this.style.display = 'none';
+      };
       img.appendChild(imgElement);
-    } else {
-      img.style.background = 'linear-gradient(135deg,var(--accent1),var(--accent2))';
-      img.style.minHeight = '200px';
-      img.style.display = 'flex';
-      img.style.alignItems = 'center';
-      img.style.justifyContent = 'center';
-      img.style.color = '#fff';
-      img.innerHTML = `<span style="font-size:0.9rem;text-align:center;padding:1rem;">${p.title}</span>`;
     }
+    
+    // Text fallback (shows if image fails)
+    const textFallback = document.createElement('div');
+    textFallback.style.position = 'absolute';
+    textFallback.style.inset = '0';
+    textFallback.style.display = 'flex';
+    textFallback.style.alignItems = 'center';
+    textFallback.style.justifyContent = 'center';
+    textFallback.style.color = '#fff';
+    textFallback.style.fontSize = '0.9rem';
+    textFallback.style.textAlign = 'center';
+    textFallback.style.padding = '1rem';
+    textFallback.style.background = 'rgba(0,0,0,0.3)';
+    textFallback.innerHTML = `<span>${p.title}</span>`;
+    img.appendChild(textFallback);
     
     const overlay = document.createElement('div');
     overlay.className = 'proj-overlay';
